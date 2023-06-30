@@ -1,0 +1,115 @@
+.divCard {
+  display: flex;
+  align-items: flex-start;
+  background-color: #39164E;
+  width: 600px;
+  height: 300px;
+  margin: 20px;
+  border-radius: 40px;
+  animation: floatAnimation 3s infinite ease-in-out;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  position: relative;
+}
+
+.divCard:hover {
+  transform: scale(1.05);
+}
+
+.title {
+  color: white;
+  font-size: 40px;
+  margin-left: 15px;
+  margin-top: 30px;
+  margin-right: 70px;
+  margin-bottom: 15px;
+  line-height: 45px;
+}
+
+.details {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  margin-top: 3px;
+  color: white;
+}
+
+.details h3 {
+  margin: 5px 0;
+}
+
+.alive {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  color: white;
+}
+
+.alive::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: green;  
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.dead {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  color: white;
+}
+
+.dead::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+
+.img {
+  width: 250px;
+  height: 250px;
+  border-radius: 18px;
+  margin-right: 15px;
+  margin-top: 24px;
+  margin-left: 30px;
+}
+
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border: 2px solid white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 25px;
+  margin-top: 25px;
+}
+
+.button:hover {
+  background-color: white;
+  color: #39164E;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:active {
+  background-color: white;
+}
+
+.link {
+  text-decoration: none;
+}
