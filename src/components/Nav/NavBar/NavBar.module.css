@@ -19,49 +19,35 @@
     display: flex;
   }
 
-  .buttonF {
-    margin-left: 10px;
+  .button {
+    margin-left: auto;
     padding: 10px 15px;
     font-size: 18px;
     font-weight: 800;
     border: none;
     background-color: transparent;
-    transition: color 0.3s;
   }
   
-  .buttonF:hover {
-    color: #FFD700;
-  }
-
-  .buttonHM {
-    margin-left: 10px;
-    padding: 10px 15px;
-    font-size: 18px;
-    font-weight: 800;
-    border: none;
-    background-color: transparent;
-    transition: color 0.3s;
+  .button:hover {
+    color: #FFBF60;
+    background-color: white;
   }
   
-  .buttonHM:hover {
-    color: #FFD700;
-  }
-  
-  .buttonAM {
-    margin-left: 30px;
+  .buttonSO {
+    margin-left: 30PX;
     margin-right: 30px;
     padding: 10px 15px;
     font-size: 18px;
     font-weight: 600;
     background-color: white;
-    border: 1px solid #FFD700;
+    border: 1px solid #FFBF60;
     border-radius: 5px;
     transition: background-color 0.3s;
   }
   
-  .buttonAM:hover,
-  .buttonAM:focus {
-    background-color: #FFD700;
+  .buttonSO:hover,
+  .buttonSO:focus {
+    background-color: #FFBF60;
     color: white;
   }
   

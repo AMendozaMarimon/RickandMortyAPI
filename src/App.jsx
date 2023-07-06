@@ -1,12 +1,36 @@
 import axios from "axios";
 import Cards from "./components/Cards/Cards.jsx";
 import Details from "./components/Details/Details.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Form from "./components/Form/Form.jsx";
 import Nav from "./components/Nav/Nav";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Favorites from "./components/Favotites/Favorites.jsx";
 
 function App() {
+  const navigate = useNavigate();
+
   const [characters, setCharacters] = useState([]);
+  const [ access, setAccess ] = useState(false);
+  const EMAIL = 'aymarprueba1@gmail.com';
+  const PASSWORD = 'aimar02';
+
+  const login = (userData) => {
+    if (userData.password === PASSWORD && userData.email === EMAIL) {
+      setAccess(true);
+      navigate('/home');
+    } else {
+      alert('Email or Password are incorrect!')
+    }
+  };
+
+  const LogOut = () => {
+    setAccess(false);
+  }
+
+  useEffect(() => {
+    !access && navigate('/');
+ }, [access, navigate]);
 
   const onSearch = (id) => {
     const characterId = parseInt(id);
@@ -14,7 +38,7 @@ function App() {
       (character) => character.id === characterId
     );
     if (existingCharacter) {
-      window.alert("¡El personaje ya ha sido agregado!");
+      window.alert("The character has already been added!");
       return;
     }
 
@@ -25,22 +49,24 @@ function App() {
         }
       })
       .catch(() => {
-        window.alert("¡No hay personajes con este ID!");
+        window.alert("There are no characters with this ID!");
       });
   };
 
-  const onClose = (id) => {
+  const onClose = id => {
     setCharacters((oldChars) =>
       oldChars.filter((char) => char.id !== Number(id))
     );
   };
 
   return (
-    <div className="App">
-        <Nav onSearch={onSearch} />
+    <div>
+        <Nav onSearch={onSearch} LogOut={LogOut}/>
         <Routes>
+          <Route path="/" element={<Form login={login}/>}/>
           <Route path="/home" element={<Cards characters={characters} onClose={onClose} />}/>
           <Route path="/detail/:id" element={<Details />}/>
+          <Route path="/favorites" element={<Favorites />}/>
         </Routes>
     </div>
   );
