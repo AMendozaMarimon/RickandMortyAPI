@@ -1,0 +1,68 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+    padding: 70px;
+  }
+  
+  .card {
+    display: flex;
+    width: 750px;
+    height: 400px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+  }
+  
+  .imageContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .imgD {
+    margin-right: 80px;
+    margin-left: 0;
+  }
+  
+  .image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    margin-left: 10px;
+    margin-right: 20px; 
+  }
+
+  .detailsContainer {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 2px;
+    color: #4f365e;
+  }
+  
+  .name {
+    margin-top: 18px;
+    font-size: 40px;
+    color: #39164E;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 20px;
+  }
+
+  .info {
+    margin-top: 5px;
+    color: #777;
+  }
+  
+  p {
+    margin: 7px 0;
+  }
+  
