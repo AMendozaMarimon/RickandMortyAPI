@@ -10,7 +10,7 @@ export default function Details() {
   const [character, setCharacter] = useState({});
 
   useEffect(() => {
-    axios(`http://localhost:3001/rickandmorty/character/${id}`)
+    axios(`http://localhost:3001/characters/${id}`)
       .then(({ data }) => {
         if (data.name) {
           setCharacter(data);
@@ -39,6 +39,12 @@ export default function Details() {
             <p> <b>Status: </b>{character.status}</p>
             <p> <b>Species: </b>{character.species}</p>
             <p> <b>Gender: </b>{character.gender}</p>
+            {character.origin && character.origin.name && (
+              <p>
+                <b>Origin: </b>
+              {character.origin.name}
+              </p>
+            )}  
             {character.location && character.location.name && (
             <p>
                 <b>Location: </b>

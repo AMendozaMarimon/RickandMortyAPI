@@ -12,17 +12,16 @@ function App() {
 
   const [characters, setCharacters] = useState([]);
   const [ access, setAccess ] = useState(false);
-  const EMAIL = 'aymarprueba1@gmail.com';
-  const PASSWORD = 'aimar02';
 
-  const login = (userData) => {
-    if (userData.password === PASSWORD && userData.email === EMAIL) {
-      setAccess(true);
-      navigate('/home');
-    } else {
-      alert('Email or Password are incorrect!')
-    }
-  };
+  function login(userData) {
+    const { email, password } = userData;
+    const URL = 'http://localhost:3001/user/login/';
+    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+      const { access } = data;
+      setAccess(access);
+      access && navigate('/home');
+    });
+  }
 
   const LogOut = () => {
     setAccess(false);
@@ -42,7 +41,7 @@ function App() {
       return;
     }
 
-    axios(`http://localhost:3001/rickandmorty/character/${id}`)
+    axios(`http://localhost:3001/characters/${id}`)
       .then(({ data }) => {
         if (data.name) {
           setCharacters((oldChars) => [...oldChars, data]);

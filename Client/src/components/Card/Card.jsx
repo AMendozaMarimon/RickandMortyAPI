@@ -28,7 +28,6 @@ function Card(props) {
   };
 
   useEffect(() => {
-    console.log(myFavorite, 'Hola')
     // eslint-disable-next-line no-undef
     myFavorite.forEach((fav) => {
        if (fav.id === id) {
