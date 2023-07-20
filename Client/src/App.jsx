@@ -11,48 +11,57 @@ function App() {
   const navigate = useNavigate();
 
   const [characters, setCharacters] = useState([]);
-  const [ access, setAccess ] = useState(false);
+  const [access, setAccess] = useState(false);
 
-  function login(userData) {
-    const { email, password } = userData;
-    const URL = 'http://localhost:3001/user/login/';
-    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+  async function login(userData) {
+    try {
+      const { email, password } = userData;
+      const URL = `http://localhost:3001/user/login/?email=${email}&password=${password}`;
+      const { data } = await axios.get(URL);
+  
       const { access } = data;
       setAccess(access);
-      access && navigate('/home');
-    });
-  }
+      access && navigate("/home");
+    } catch (error) {
+      console.error(error);
+      window.alert("The email or password are incorrect");
+    }
+  }  
 
   const LogOut = () => {
     setAccess(false);
-  }
-
-  useEffect(() => {
-    !access && navigate('/');
- }, [access, navigate]);
-
-  const onSearch = (id) => {
-    const characterId = parseInt(id);
-    const existingCharacter = characters.find(
-      (character) => character.id === characterId
-    );
-    if (existingCharacter) {
-      window.alert("The character has already been added!");
-      return;
-    }
-
-    axios(`http://localhost:3001/characters/${id}`)
-      .then(({ data }) => {
-        if (data.name) {
-          setCharacters((oldChars) => [...oldChars, data]);
-        }
-      })
-      .catch(() => {
-        window.alert("There are no characters with this ID!");
-      });
   };
 
-  const onClose = id => {
+  useEffect(() => {
+    !access && navigate("/");
+  }, [access, navigate]);
+
+  const onSearch = async (id) => {
+    try {
+      const characterId = parseInt(id);
+      const existingCharacter = characters.find(
+        (character) => character.id === characterId
+      );
+  
+      if (existingCharacter) {
+        window.alert("The character has already been added!");
+        return;
+      }
+  
+      const { data } = await axios(`http://localhost:3001/characters/${id}`);
+  
+      if (data.name) {
+        setCharacters((oldChars) => [...oldChars, data]);
+      } 
+      
+    } catch (error) {
+      console.error(error);
+      window.alert("An error occurred while searching for the character!");
+    }
+  };
+  
+
+  const onClose = (id) => {
     setCharacters((oldChars) =>
       oldChars.filter((char) => char.id !== Number(id))
     );
@@ -60,13 +69,16 @@ function App() {
 
   return (
     <div>
-        <Nav onSearch={onSearch} LogOut={LogOut}/>
-        <Routes>
-          <Route path="/" element={<Form login={login}/>}/>
-          <Route path="/home" element={<Cards characters={characters} onClose={onClose} />}/>
-          <Route path="/detail/:id" element={<Details />}/>
-          <Route path="/favorites" element={<Favorites />}/>
-        </Routes>
+      <Nav onSearch={onSearch} LogOut={LogOut} />
+      <Routes>
+        <Route path="/" element={<Form login={login} />} />
+        <Route
+          path="/home"
+          element={<Cards characters={characters} onClose={onClose} />}
+        />
+        <Route path="/detail/:id" element={<Details />} />
+        <Route path="/favorites" element={<Favorites />} />
+      </Routes>
     </div>
   );
 }
