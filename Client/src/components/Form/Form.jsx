@@ -6,27 +6,27 @@ export default function Form(props) {
   // eslint-disable-next-line react/prop-types
   const { login } = props;
 
-    const [ userData, setUserData ] = useState({
-        email: '',
-        password: '',
-    });
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
 
-    const [ errors, setErrors ] = useState({});
+  const [errors, setErrors] = useState({});
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setUserData((prevUserData) => ({
-            ...prevUserData,
-            [name]: value,
-        }));
-        const validationErrors = validation(userData);
-        setErrors(validationErrors);
-    };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      [name]: value,
+    }));
+    const validationErrors = validation(userData);
+    setErrors(validationErrors);
+  };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        login(userData);
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    login(userData);
+  };
 
   return (
     <div className={styles.container}>
@@ -41,12 +41,24 @@ export default function Form(props) {
         <form onSubmit={handleSubmit}>
           <h1>Hola! 👍✨</h1>
           <label>Email: </label>
-          <input type="text" name="email" value={userData.email} onChange={handleChange} placeholder="Enter your email..." />
+          <input
+            type="text"
+            name="email"
+            value={userData.email}
+            onChange={handleChange}
+            placeholder="Enter your email..."
+          />
           {errors.email && <p className={styles.p}>{errors.email}</p>}
           <label>Password: </label>
-          <input type="password" name="password" value={userData.password} onChange={handleChange} placeholder="Enter your password..." />
+          <input
+            type="password"
+            name="password"
+            value={userData.password}
+            onChange={handleChange}
+            placeholder="Enter your password..."
+          />
           {errors.password && <p className={styles.p}>{errors.password}</p>}
-          <button type="submit" >Log In</button>
+          <button type="submit">Log In</button>
         </form>
       </div>
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
@@ -5,9 +6,7 @@ import { addFav, removeFav } from "../../redux/actions";
 import { connect } from 'react-redux';
 import { useEffect, useState } from "react";
 
-// eslint-disable-next-line react-refresh/only-export-components
 function Card(props) {
-  // eslint-disable-next-line react/prop-types
   const { id, name, status, species, gender, origin, image, onClose, removeFav, addFav, myFavorite } = props;
   const statusColor = status === "Alive" ? styles.alive : styles.dead;
 
@@ -23,12 +22,11 @@ function Card(props) {
       removeFav(id);
     } else {
       setIsFav(true);
-      addFav({id, name, status, species, gender, origin, image, onClose});
+      addFav({id, name, status, species, gender, origin, image});
     }
   };
 
   useEffect(() => {
-    // eslint-disable-next-line no-undef
     myFavorite.forEach((fav) => {
        if (fav.id === id) {
           setIsFav(true);

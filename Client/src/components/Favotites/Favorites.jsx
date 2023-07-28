@@ -4,6 +4,7 @@ import styles from "./Favorites.module.css";
 
 export default function Favorites() {
   const myFavorite = useSelector((state) => state.myFavorite);
+
   return (
     <div>
       <h1 className={styles.Title}>✨ My Favorites ✨</h1>

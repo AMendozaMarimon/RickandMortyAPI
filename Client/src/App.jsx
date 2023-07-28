@@ -18,15 +18,19 @@ function App() {
       const { email, password } = userData;
       const URL = `http://localhost:3001/user/login/?email=${email}&password=${password}`;
       const { data } = await axios.get(URL);
-  
       const { access } = data;
-      setAccess(access);
-      access && navigate("/home");
+
+      if (access) {
+        setAccess(access);
+        navigate("/home");
+      } else {
+        window.alert("The email or password is incorrect");
+      }
     } catch (error) {
       console.error(error);
-      window.alert("The email or password are incorrect");
+      window.alert("An error occurred while logging in");
     }
-  }  
+  }
 
   const LogOut = () => {
     setAccess(false);
@@ -42,24 +46,22 @@ function App() {
       const existingCharacter = characters.find(
         (character) => character.id === characterId
       );
-  
+
       if (existingCharacter) {
         window.alert("The character has already been added!");
         return;
       }
-  
+
       const { data } = await axios(`http://localhost:3001/characters/${id}`);
-  
+
       if (data.name) {
         setCharacters((oldChars) => [...oldChars, data]);
-      } 
-      
+      }
     } catch (error) {
       console.error(error);
       window.alert("An error occurred while searching for the character!");
     }
   };
-  
 
   const onClose = (id) => {
     setCharacters((oldChars) =>
